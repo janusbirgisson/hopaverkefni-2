@@ -2,27 +2,38 @@ import { fetcher } from './lib/fetcher.js';
 import { renderContentPage } from './lib/pages/content-page.js';
 import { renderIndexPage } from './lib/pages/index-page.js';
 import { renderSubpage } from './lib/pages/sub-page.js';
+import { empty } from './lib/elements.js';
 
-async function render(root, querystring) {
+export async function render(root) {
+  empty(root);
+
   const mainIndexJson = await fetcher('data/index.json');
 
-  const params = new URLSearchParams(querystring);
+  const params = new URLSearchParams(window.location.search);
   const type = params.get('type');
   const content = params.get('content');
 
   console.log(type, content);
 
-  if (!type) {
-    return renderIndexPage(root, mainIndexJson);
+  if (type && !content) {
+    return renderSubpage(root, mainIndexJson, type);;
+
   }
 
-  if (content) {
-    return renderContentPage(root, mainIndexJson);
+  if (content && type) {
+    return renderContentPage(root, mainIndexJson, type, content);
   }
 
-  renderSubpage(root, mainIndexJson, type);
+  renderIndexPage(root, mainIndexJson);
 }
 
 const root = document.querySelector('#app');
 
-render(root, window.location.search);
+window.onpopstate = () => {
+  render(root);
+};
+
+
+
+// Athugum í byrjun hvað eigi að birta.
+render(root);
