@@ -5,24 +5,91 @@
 
 html {
   box-sizing: border-box;
+  font-family: var(--font-family);
+  padding: var(--spacing);
+  background-color: #eee;
 }
 
 *,
-*:before,
-*:after {
+*::before,
+*::after {
   box-sizing: inherit;
 }
 
 :root {
-  --spacing: 1rem;
-  --max-width: 56rem;
-
   --font-size-button: 1rem;
-  --font-family: -system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
-    Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-
+  --font-family: -system-ui, -apple-system, blinkmacsystemfont, 'Segoe UI',
+    roboto, oxygen, ubuntu, cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   --color-light-gray: #f5f5f5;
   --color-background-zebra: var(--color-light-gray);
+  --font-size-base: 16px;
+  --font-size-headings: 1.5rem;
+
+  /* Grunn bilið okkar er 1rem == 16px */
+  --spacing: 1rem;
+  --spacing-medium: 3rem;
+  --spacing-large: 6rem;
+
+  /* Bil á milli „stærri“ eininga (header, efnisbox, footer) */
+  --vertical-space: calc(var(--gutter) * 1);
+  --vertical-space-large: calc(var(--gutter) * 1.5);
+
+  /* Hámarks og lágmarks breidd á efni */
+  --max-width: 1290px;
+  --min-width-image: 409px;
+  --max-width-image: 300px;
+  --max-width-footer-section: 250px;
+  --max-navigation-height: 100px;
+  --max-height-footer: 670px;
+
+  /* Border breiddir */
+  --border-width: 1px;
+  --border-radius-regular: 5px;
+  --border-radius-image: 10px;
+  --border-regular: 1px solid #000;
+
+  /* todo longhand */
+  --border-button: 1px solid var(--color-purple);
+  --border-with-background: 4px solid #c9b;
+
+  /* Button settings */
+  --button-width: 250px;
+  --button-height: 52px;
+
+  /* Grid stillingar */
+  --columns: 12;
+  --gutter: 30px;
+  --offset: 20px;
+
+  /* Breidd á efni með offset */
+  --width-offset: calc(100% - (2 * var(--offset)));
+
+  /* Litir */
+
+  /** Litir með nafni **/
+  --color-grey: #fafafa;
+  --color-purple: #9b7ebd;
+  --color-white: #fff;
+  --color-black: #000;
+  --color-beige: #f7f1eb;
+  --color-text-gray: #9b9b9b;
+
+  /** Litir með notkun **/
+  --color-background-primary: var(--color-white);
+  --color-background-secondary: var(--color-grey);
+  --color-background-book: var(--color-beige);
+  --color-background-footer: var(--color-black);
+
+  /* Letur stillingar */
+  --font-base-size: 1rem;
+  --font-family-base: 'Poppins-Regular', arial, helvetica, sans-serif;
+  --font-family-heading: 'PlayfairDisplay-Regular', 'MS comic Sans', cursive;
+
+  /* Transitions */
+  --transition-time-short: 300ms;
+  --transition-time-long: 600ms;
+  --transition-timing-function: ease-in-out;
+
 }
 
 .hidden {
@@ -30,10 +97,7 @@ html {
   display: none !important;
 }
 
-html {
-  font-family: var(--font-family);
-  padding: var(--spacing);
-}
+
 
 input,
 textarea,
@@ -42,15 +106,192 @@ button {
 }
 
 button {
-  padding: 0.25rem 0.5rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: var(--border-button);
+  border-radius: 0.5em;
+  border-width: var(--border-width);
+  width: var(--button-width);
+  height: var(--button-height);
+  color: var(--color-purple);
+  font-size: 1rem;
+  text-decoration: none;
+  background: linear-gradient(90deg, transparent 50%, var(--color-purple) 50%);
+  background-size: 200% 50%;
+  background-position: 0 0;
+  transition: background-position var(--transition-time-short) var(--transition-timing-function), color var(--transition-time-short) var(--transition-timing-function), border-color var(--transition-time-short) var(--transition-timing-function);
 }
 
-#root {
+
+
+button:hover {
+  background-position: -100% 0;
+  color: var(--color-white);
+  cursor: pointer;
+}
+
+
+
+.buttons-container {
+  display: flex;
+  justify-content: space-evenly;
+  gap: var(--spacing);
+}
+
+@media (width <=800px) {
+  .buttons-container {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+
+main {
   display: flex;
   flex-direction: column;
   gap: var(--spacing);
+  margin-bottom: var(--spacing-medium);
 
-  margin: var(--spacing) auto;
-  padding-inline: var(--spacing);
-  max-width: var(--max-width);
+}
+
+header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing);
+  margin-bottom: var(--spacing-medium);
+
+}
+
+header h1 {
+  display: block;
+  text-align: center;
+
+}
+
+h2,
+h3 {
+  display: flex;
+  justify-content: center;
+}
+
+.navigation {
+  display: flex;
+  justify-content: center;
+
+}
+
+@media (width <=800px) {
+  .navigation {
+    margin: 0 var(--spacing);
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: start;
+  }
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  padding-left: var(--spacing);
+
+}
+
+.navigation>ul {
+  display: flex;
+  flex-flow: column wrap;
+  border-bottom: 0;
+  border-left: 1px solid #3b1e54;
+}
+
+
+@media (width > 800px) {
+  .navigation>ul {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    list-style: none;
+    justify-content: space-evenly;
+    border-left: 0;
+    border-bottom: 1px solid #3b1e54;
+
+  }
+}
+
+
+
+.navigation a {
+  text-decoration: none;
+  font-size: 1.25rem;
+  color: #262626;
+}
+
+
+
+
+
+
+
+ul li {
+  position: relative;
+  padding: 0.5rem 0;
+  padding-left: 1.5rem;
+  font-size: 1rem;
+  color: #333;
+}
+
+ul li::before {
+  content: '•';
+  color: var(--color-purple);
+  font-weight: bold;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+figure {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 100%;
+}
+
+.keywords-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.keyword-section {
+  border: 1px solid #ccc;
+  padding: 1rem;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  box-shadow: 0 4px 6px rgba(0 0 0 / 10%);
+}
+
+.keyword-section h3,
+.keyword-section p {
+  margin-bottom: 0.75rem;
+}
+
+footer {
+  background-color: #363636;
+  color: #fff;
+  text-align: center;
+  padding: 2rem;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 10;
+}
+
+body {
+  margin: 0;
+  padding-bottom: 4rem;
 }
