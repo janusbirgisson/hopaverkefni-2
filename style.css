@@ -250,3 +250,11 @@ ul li::before {
   top: 50%;
   transform: translateY(-50%);
 }
+
+figure {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 100%;
+}
