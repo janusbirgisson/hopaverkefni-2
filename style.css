@@ -279,9 +279,9 @@ figure {
   margin-bottom: 0.75rem;
 }
 
-footer{
+footer {
   background-color: #363636;
-  color: white;
+  color: #fff;
   text-align: center;
   padding: 2rem;
   position: fixed;
@@ -291,7 +291,7 @@ footer{
   z-index: 10;
 }
 
-body{
+body {
   margin: 0;
   padding-bottom: 4rem;
 }
