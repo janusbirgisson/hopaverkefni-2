@@ -271,9 +271,27 @@ figure {
   padding: 1rem;
   border-radius: 8px;
   background-color: #f9f9f9;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px rgba(0 0 0 / 10%);
 }
 
-.keyword-section h3, p {
+.keyword-section h3,
+.keyword-section p {
   margin-bottom: 0.75rem;
+}
+
+footer{
+  background-color: #363636;
+  color: white;
+  text-align: center;
+  padding: 2rem;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 10;
+}
+
+body{
+  margin: 0;
+  padding-bottom: 4rem;
 }
