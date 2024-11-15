@@ -1,4 +1,4 @@
-# Hópaverkefni 2 - TÖL107G - Team 38
+# Hópaverkefni 2 - TÖL107G - Team 32
 
 This is the repository for Hópaverkefni 2 in TÖL107G. The project is structured to use modern web development tools like Sass, Stylelint, and Browser-Sync for streamlined development and styling.
 
